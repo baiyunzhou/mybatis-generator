@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<properties resource="generator.properties" />
+
+	<context id="mysql" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat">
+
+		<!-- org.mybatis.generator.internal.db.SqlReservedWords 自动对这个类中的关键字加`` -->
+		<property name="autoDelimitKeywords" value="true" />
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="com.zby.comment.MyToStringPlugin" />
+
+		<commentGenerator
+			type="com.zby.comment.MyCommentGenerator">
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="true" />
+			<property name="addRemarkComments" value="true" />
+			<property name="author" value="${author.name}" />
+		</commentGenerator>
+
+
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="${driver.class}"
+			connectionURL="${db.url}" userId="${db.username}"
+			password="${db.password}">
+		</jdbcConnection>
+
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 
+			和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="${db.forceBigDecimals}" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetProject="${model.target}"
+			targetPackage="${model.package}">
+		</javaModelGenerator>
+
+		<!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetProject="${sql.target}"
+			targetPackage="${sql.package}">
+		</sqlMapGenerator>
+
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetProject="${mapper.target}" targetPackage="${mapper.package}">
+		</javaClientGenerator>
+
+		<!-- 指定数据库表 %表示当前数据库所有表-->
+		<table tableName="${db.tableName}" schema="${db.name}" catalog="${db.name}">
+		</table>
+		
+	</context>
+</generatorConfiguration>
