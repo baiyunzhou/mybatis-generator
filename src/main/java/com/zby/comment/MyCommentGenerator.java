@@ -86,13 +86,14 @@ public class MyCommentGenerator extends EmptyCommentGenerator {
 
     private static final Map<String, String> METHOD_JAVADOC_MAP = new HashMap<String, String>() {
         private static final long serialVersionUID = 1L;
-
         {
             put("deleteByPrimaryKey", "根据主键删除数据");
             put("insert", "保存数据");
             put("selectByPrimaryKey", "根据主键查询数据");
             put("selectAll", "查询所有数据");
             put("updateByPrimaryKey", "根据主键更新数据");
+            put("insertSelective", "根据主键非空插入");
+            put("updateByPrimaryKeySelective", "根据主键非空更新");
         }
     };
 
